@@ -12,6 +12,8 @@ public class Main {
         LOGGER.info("Program start!");
         LOGGER.info("Program running!");
         LOGGER.info("Program test!");
+        LOGGER.info("Program test2!");
+        LOGGER.info("Program test3!");
         LOGGER.info("End of program!");
 
     }
