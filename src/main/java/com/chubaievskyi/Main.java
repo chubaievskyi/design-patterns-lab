@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         LOGGER.info("Program start!");
+        LOGGER.info("Program running!");
         LOGGER.info("End of program!");
 
     }
