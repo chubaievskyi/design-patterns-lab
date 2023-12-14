@@ -1,4 +1,4 @@
-package com.chubaievskyi.templatemethod.exceptions;
+package com.chubaievskyi.exceptions;
 
 public class FileNotFoundException extends RuntimeException {
 

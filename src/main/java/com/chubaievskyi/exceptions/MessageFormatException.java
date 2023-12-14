@@ -1,4 +1,4 @@
-package com.chubaievskyi.strategy.exceptions;
+package com.chubaievskyi.exceptions;
 
 public class MessageFormatException extends RuntimeException {
 

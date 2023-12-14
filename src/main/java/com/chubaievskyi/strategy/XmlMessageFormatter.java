@@ -1,6 +1,6 @@
 package com.chubaievskyi.strategy;
 
-import com.chubaievskyi.strategy.exceptions.MessageFormatException;
+import com.chubaievskyi.exceptions.MessageFormatException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
