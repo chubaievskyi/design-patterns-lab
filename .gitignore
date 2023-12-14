@@ -4,8 +4,13 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
+*.txt
 .idea/
 logfiles/
+.template-method-recorded-files/
+.strategy-recorded-files/
+.adaptor-recorded-files/
+.example-recorded-files/
 *.iws
 *.iml
 *.ipr
