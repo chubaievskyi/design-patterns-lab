@@ -11,6 +11,7 @@ logfiles/
 .strategy-recorded-files/
 .adaptor-recorded-files/
 .example-recorded-files/
+todo.txt
 *.iws
 *.iml
 *.ipr

@@ -1,7 +1,7 @@
 package com.chubaievskyi.adapter;
 
-import com.chubaievskyi.templatemethod.exceptions.FileNotFoundException;
-import com.chubaievskyi.templatemethod.exceptions.FileReadException;
+import com.chubaievskyi.exceptions.FileNotFoundException;
+import com.chubaievskyi.exceptions.FileReadException;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
