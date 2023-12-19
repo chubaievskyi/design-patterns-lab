@@ -1,5 +1,7 @@
 package com.chubaievskyi.strategy;
 
+import com.chubaievskyi.example.Message;
+
 public class TextMessageFormatter implements MessageFormatter {
 
     @Override

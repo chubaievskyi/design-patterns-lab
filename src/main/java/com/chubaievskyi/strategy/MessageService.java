@@ -3,12 +3,15 @@ package com.chubaievskyi.strategy;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.chubaievskyi.example.InputReader;
+import com.chubaievskyi.example.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MessageService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
+    private final InputReader inputReader = new InputReader();
 
     private final MessageFormatter readFormatter;
     private final MessageFormatter writeFormatter;
@@ -25,7 +28,7 @@ public class MessageService {
     }
 
     protected String readMessage() {
-        return InputReader.getInstance().getMessage();
+        return inputReader.getMessage();
     }
 
     protected void writeMessage(String formattedMessage) {

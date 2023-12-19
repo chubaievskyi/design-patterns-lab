@@ -11,6 +11,7 @@ import java.io.IOException;
 public class MessageService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
+    private final InputReader inputReader = new InputReader();
 
     public void readAndWriteMessage() {
         String messageText = readMessage();
@@ -18,7 +19,7 @@ public class MessageService {
     }
 
     protected String readMessage() {
-        return InputReader.getInstance().getMessage();
+        return inputReader.getMessage();
     }
 
     protected void writeMessage(String messageText) {

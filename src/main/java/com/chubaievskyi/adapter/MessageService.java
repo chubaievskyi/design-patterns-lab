@@ -1,5 +1,6 @@
 package com.chubaievskyi.adapter;
 
+import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -12,9 +13,11 @@ import java.io.IOException;
 public class MessageService {
 
     private final Logger log = LoggerFactory.getLogger(MessageService.class);
+    private final InputReader inputReader = new InputReader();
+
     public void readAndWriteMessage() {
 
-        MessageReader propertyReader = new PropertyMessageReader(InputReader.getInstance());
+        MessageReader propertyReader = new PropertyMessageReader(inputReader);
         String propertyMessageText = propertyReader.readMessage();
         writeMessage(propertyMessageText);
 
