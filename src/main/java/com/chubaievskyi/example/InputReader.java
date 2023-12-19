@@ -18,20 +18,11 @@ public class InputReader {
     private final Logger log = LoggerFactory.getLogger(InputReader.class);
     private final Properties properties = new Properties();
 
-    private static InputReader instance;
-
     private String message;
 
-    private InputReader() {
+    public InputReader() {
         loadProperties();
         readPropertyValue();
-    }
-
-    public static synchronized InputReader getInstance() {
-        if (instance == null) {
-            instance = new InputReader();
-        }
-        return instance;
     }
 
     private void loadProperties() {

@@ -1,5 +1,7 @@
 package com.chubaievskyi.templatemethod;
 
+import com.chubaievskyi.example.InputReader;
+import com.chubaievskyi.example.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.slf4j.Logger;
@@ -11,10 +13,11 @@ import java.io.IOException;
 public class XmlMessageService extends MessageService {
 
     private final Logger log = LoggerFactory.getLogger(XmlMessageService.class);
+    private final InputReader inputReader = new InputReader();
 
     @Override
     protected String readMessage() {
-        return InputReader.getInstance().getMessage();
+        return inputReader.getMessage();
     }
 
     @Override

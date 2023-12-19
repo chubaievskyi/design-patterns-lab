@@ -1,5 +1,7 @@
 package com.chubaievskyi.templatemethod;
 
+import com.chubaievskyi.example.InputReader;
+import com.chubaievskyi.example.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +12,11 @@ import java.io.IOException;
 public class JsonMessageService extends MessageService {
 
     private final Logger log = LoggerFactory.getLogger(JsonMessageService.class);
+    private final InputReader inputReader = new InputReader();
 
     @Override
     protected String readMessage() {
-        return InputReader.getInstance().getMessage();
+        return inputReader.getMessage();
     }
 
     @Override
