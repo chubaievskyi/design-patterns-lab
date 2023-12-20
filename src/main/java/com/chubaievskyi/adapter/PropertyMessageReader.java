@@ -3,6 +3,7 @@ package com.chubaievskyi.adapter;
 import com.chubaievskyi.example.InputReader;
 
 public class PropertyMessageReader implements MessageReader {
+
     private final InputReader inputReader;
 
     public PropertyMessageReader(InputReader inputReader) {

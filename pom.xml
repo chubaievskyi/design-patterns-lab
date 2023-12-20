@@ -73,7 +73,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.chubaievskyi.templatemethod.Main</mainClass>
+                                    <mainClass>com.chubaievskyi.templatemethod.TemplateMethodClient</mainClass>
                                     <manifestEntries>
                                         <Multi-Release>true</Multi-Release>
                                         <Class-Path>./config/</Class-Path>

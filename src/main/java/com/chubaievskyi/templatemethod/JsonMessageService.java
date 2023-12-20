@@ -35,6 +35,6 @@ public class JsonMessageService extends MessageService {
 
     @Override
     protected String getFilePath() {
-        return ".template-method-recorded-files/json_message_output.json";
+        return inputReader.getTemplateMethodJsonFilePath();
     }
 }

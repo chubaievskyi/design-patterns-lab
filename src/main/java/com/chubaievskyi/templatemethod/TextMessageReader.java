@@ -30,6 +30,6 @@ public class TextMessageReader extends MessageService {
 
     @Override
     protected String getFilePath() {
-        return ".template-method-recorded-files/text_message_output.txt";
+        return inputReader.getTemplateMethodTxtFilePath();
     }
 }

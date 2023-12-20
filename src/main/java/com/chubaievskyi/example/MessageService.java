@@ -10,31 +10,35 @@ import java.io.IOException;
 
 public class MessageService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
+    private final Logger log = LoggerFactory.getLogger(MessageService.class);
     private final InputReader inputReader = new InputReader();
 
     public void readAndWriteMessage() {
-        String messageText = readMessage();
-        writeMessage(messageText);
+        ObjectMapper objectMapper = new XmlMapper();
+        try (FileWriter writer = new FileWriter(getFilePath())) {
+            String messageText = readMessage();
+            writeMessage(messageText, writer, objectMapper);
+        } catch (IOException e) {
+            log.error("Exception occurred while writing to file", e);
+        }
     }
 
     protected String readMessage() {
         return inputReader.getMessage();
     }
 
-    protected void writeMessage(String messageText) {
-        ObjectMapper objectMapper = new XmlMapper();
-        String filePath = getFilePath();
-        try (FileWriter writer = new FileWriter(filePath)) {
+    protected void writeMessage(String messageText, FileWriter writer, ObjectMapper objectMapper) {
+
+        try {
             String message = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Message(messageText));
             writer.write(message);
-            LOG.info("Message successfully written to file: {}", filePath);
+            log.info("Message successfully written to file");
         } catch (IOException e) {
-            LOG.error("Exception occurred while writing to file", e);
+            log.error("Exception occurred while writing to file", e);
         }
     }
 
     protected String getFilePath() {
-        return ".example-recorded-files/xml_message_output.xml";
+        return inputReader.getExampleFilePath();
     }
 }

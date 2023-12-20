@@ -3,9 +3,9 @@ package com.chubaievskyi.strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Main {
+public class StrategyClient {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StrategyClient.class);
 
     public static void main(String[] args) {
 
