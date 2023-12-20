@@ -1,6 +1,6 @@
 package com.chubaievskyi.templatemethod;
 
-public abstract class MessageService {
+public abstract class TemplateMessageService {
 
     protected abstract String readMessage();
 

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class TextMessageReader extends MessageService {
+public class TextMessageService extends TemplateMessageService {
 
-    private final Logger log = LoggerFactory.getLogger(TextMessageReader.class);
+    private final Logger log = LoggerFactory.getLogger(TextMessageService.class);
     private final InputReader inputReader = new InputReader();
 
     @Override

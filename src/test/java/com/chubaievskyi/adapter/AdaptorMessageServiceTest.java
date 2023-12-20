@@ -1,5 +1,6 @@
-package com.chubaievskyi.example;
+package com.chubaievskyi.adapter;
 
+import com.chubaievskyi.example.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.Test;
@@ -13,11 +14,11 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-
 @ExtendWith(MockitoExtension.class)
-class MessageServiceTest {
+class AdaptorMessageServiceTest {
 
     @Mock
     private FileWriter mockFileWriter;
@@ -29,7 +30,7 @@ class MessageServiceTest {
     private ObjectWriter mockObjectWriter;
 
     @InjectMocks
-    private MessageService messageService;
+    private AdaptorMessageService adaptorMessageService;
 
     @Test
     void testWriteMessage() throws IOException {
@@ -39,23 +40,15 @@ class MessageServiceTest {
         when(mockObjectMapper.writerWithDefaultPrettyPrinter()).thenReturn(mockObjectWriter);
         when(mockObjectWriter.writeValueAsString(any(Message.class))).thenReturn(messageText);
 
-        messageService.writeMessage(messageText, mockFileWriter, mockObjectMapper);
+        adaptorMessageService.writeMessage(messageText, mockFileWriter, mockObjectMapper);
 
         verify(mockFileWriter, times(1)).write(anyString());
-
-    }
-
-    @Test
-    void testReadMessage() {
-
-        String message = messageService.readMessage();
-        assertEquals("Hello world!!!", message);
     }
 
     @Test
     void testGetFilePath() {
 
-        String filePath = messageService.getFilePath();
-        assertEquals(".example-recorded-files/xml_message_output.xml!!!", filePath);
+        String filePath = adaptorMessageService.getFilePath();
+        assertEquals(".adaptor-recorded-files/xml_message_output.xml!!!", filePath);
     }
 }

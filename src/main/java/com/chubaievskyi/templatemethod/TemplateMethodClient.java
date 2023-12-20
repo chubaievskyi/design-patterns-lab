@@ -11,13 +11,13 @@ public class TemplateMethodClient {
 
         LOG.info("Program start!");
 
-        MessageService textMessageService = new TextMessageReader();
+        TemplateMessageService textMessageService = new TextMessageService();
         textMessageService.readAndWriteMessage();
 
-        MessageService jsonMessageService = new JsonMessageService();
+        TemplateMessageService jsonMessageService = new JsonMessageService();
         jsonMessageService.readAndWriteMessage();
 
-        MessageService xmlMessageService = new XmlMessageService();
+        TemplateMessageService xmlMessageService = new XmlMessageService();
         xmlMessageService.readAndWriteMessage();
 
         LOG.info("End of program!");

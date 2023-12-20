@@ -9,10 +9,15 @@ import java.io.IOException;
 
 public class JsonMessageReader implements MessageReader {
 
+    private final ObjectMapper objectMapper;
+
+    public JsonMessageReader(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Override
     public String readMessage() {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(new File("message-list.json"));
             return jsonNode.get("messageText").asText() + " -- message from message-list.json file";
 
