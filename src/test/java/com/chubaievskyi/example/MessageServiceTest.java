@@ -2,7 +2,6 @@ package com.chubaievskyi.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,43 +11,53 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class MessageServiceTest {
 
-    private InputReader inputReader;
+    @Mock
+    private FileWriter mockFileWriter;
 
     @Mock
-    private ObjectMapper objectMapper;
+    private ObjectMapper mockObjectMapper;
 
     @Mock
-    private ObjectWriter objectWriter;
-
-    @Mock
-    private FileWriter fileWriter;
+    private ObjectWriter mockObjectWriter;
 
     @InjectMocks
     private MessageService messageService;
 
-    private String message;
+    @Test
+    void testWriteMessage() throws IOException {
 
-    @BeforeEach
-    void setUp() {
-        message = inputReader.getMessage();
+        String messageText = "Test Message";
+
+        when(mockObjectMapper.writerWithDefaultPrettyPrinter()).thenReturn(mockObjectWriter);
+        when(mockObjectWriter.writeValueAsString(any(Message.class))).thenReturn(messageText);
+
+        MessageService messageService = new MessageService();
+
+        messageService.writeMessage(messageText, mockFileWriter, mockObjectMapper);
+
+        verify(mockFileWriter, times(1)).write(anyString());
+
     }
 
     @Test
-    void testReadAndWriteMessage() throws IOException {
+    void testReadMessage() {
 
-        when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
-        when(objectWriter.writeValueAsString(new Message(message))).thenReturn("<Message><messageText>" + message + "</messageText></Message>");
-        doNothing().when(fileWriter).write(anyString());
-        doNothing().when(fileWriter).close();
+        String message = messageService.readMessage();
+        assertEquals("Hello world!!!", message);
+    }
 
-        messageService.readAndWriteMessage();
+    @Test
+    void testGetFilePath() {
 
-        verify(inputReader, times(1)).getMessage();
-        verify(fileWriter, times(1)).write("<Message><messageText>" + message + "</messageText></Message>");
+        String filePath = messageService.getFilePath();
+        assertEquals(".example-recorded-files/xml_message_output.xml!!!", filePath);
     }
 }

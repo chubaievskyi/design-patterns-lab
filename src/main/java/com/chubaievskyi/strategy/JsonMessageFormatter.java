@@ -1,5 +1,6 @@
 package com.chubaievskyi.strategy;
 
+import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
 import com.chubaievskyi.exceptions.MessageFormatException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,6 +20,6 @@ public class JsonMessageFormatter implements MessageFormatter {
 
     @Override
     public String getFilePath() {
-        return ".strategy-recorded-files/json_message_output.json";
+        return new InputReader().getStrategyJsonFilePath();
     }
 }

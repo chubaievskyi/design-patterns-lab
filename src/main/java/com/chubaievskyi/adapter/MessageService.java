@@ -16,25 +16,35 @@ public class MessageService {
     private final InputReader inputReader = new InputReader();
 
     public void readAndWriteMessage() {
-
-        MessageReader propertyReader = new PropertyMessageReader(inputReader);
-        String propertyMessageText = propertyReader.readMessage();
-        writeMessage(propertyMessageText);
-
-        MessageReader jsonReader = new JsonMessageReader();
-        String jsonMessageText = jsonReader.readMessage();
-        writeMessage(jsonMessageText);
-    }
-
-    private void writeMessage(String messageText) {
         ObjectMapper objectMapper = new XmlMapper();
-        String filePath = ".adaptor-recorded-files/xml_message_output.xml";
-        try (FileWriter writer = new FileWriter(filePath, true)) {
-            String message = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Message(messageText));
-            writer.write(message);
-            log.info("Message successfully written to file: {}", filePath);
+
+        try (FileWriter writer = new FileWriter(getFilePath())) {
+
+            MessageReader propertyReader = new PropertyMessageReader(inputReader);
+            String propertyMessageText = propertyReader.readMessage();
+            writeMessage(propertyMessageText, writer, objectMapper);
+
+            MessageReader jsonReader = new JsonMessageReader();
+            String jsonMessageText = jsonReader.readMessage();
+            writeMessage(jsonMessageText, writer, objectMapper);
+
         } catch (IOException e) {
             log.error("Exception occurred while writing to file", e);
         }
+    }
+
+    private void writeMessage(String messageText, FileWriter writer, ObjectMapper objectMapper) {
+
+        try {
+            String message = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Message(messageText));
+            writer.write(message);
+            log.info("Message successfully written to file");
+        } catch (IOException e) {
+            log.error("Exception occurred while writing to file", e);
+        }
+    }
+
+    protected String getFilePath() {
+        return inputReader.getAdaptorFilePath();
     }
 }

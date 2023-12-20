@@ -1,5 +1,6 @@
 package com.chubaievskyi.strategy;
 
+import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
 
 public class TextMessageFormatter implements MessageFormatter {
@@ -11,6 +12,6 @@ public class TextMessageFormatter implements MessageFormatter {
 
     @Override
     public String getFilePath() {
-        return ".strategy-recorded-files/text_message_output.txt";
+        return new InputReader().getStrategyTxtFilePath();
     }
 }

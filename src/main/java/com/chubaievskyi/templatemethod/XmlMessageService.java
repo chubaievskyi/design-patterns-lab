@@ -36,6 +36,6 @@ public class XmlMessageService extends MessageService {
 
     @Override
     protected String getFilePath() {
-        return ".template-method-recorded-files/xml_message_output.xml";
+        return inputReader.getTemplateMethodXmlFilePath();
     }
 }

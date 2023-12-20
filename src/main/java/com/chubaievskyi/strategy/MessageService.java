@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class MessageService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
+    private  final Logger log = LoggerFactory.getLogger(MessageService.class);
     private final InputReader inputReader = new InputReader();
 
     private final MessageFormatter readFormatter;
@@ -35,9 +35,9 @@ public class MessageService {
         String filePath = writeFormatter.getFilePath();
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(formattedMessage);
-            LOG.info("Message successfully written to file: {}", filePath);
+            log.info("Message successfully written to file: {}", filePath);
         } catch (IOException e) {
-            LOG.error("Exception occurred while writing to file", e);
+            log.error("Exception occurred while writing to file", e);
         }
     }
 }

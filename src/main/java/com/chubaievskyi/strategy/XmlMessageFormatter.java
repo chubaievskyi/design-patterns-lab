@@ -1,5 +1,6 @@
 package com.chubaievskyi.strategy;
 
+import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
 import com.chubaievskyi.exceptions.MessageFormatException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,6 +20,6 @@ public class XmlMessageFormatter implements MessageFormatter {
 
     @Override
     public String getFilePath() {
-        return ".strategy-recorded-files/xml_message_output.xml";
+        return new InputReader().getStrategyXmlFilPath();
     }
 }
