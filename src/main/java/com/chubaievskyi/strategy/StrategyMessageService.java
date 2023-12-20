@@ -8,15 +8,15 @@ import com.chubaievskyi.example.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MessageService {
+public class StrategyMessageService {
 
-    private  final Logger log = LoggerFactory.getLogger(MessageService.class);
+    private  final Logger log = LoggerFactory.getLogger(StrategyMessageService.class);
     private final InputReader inputReader = new InputReader();
 
     private final MessageFormatter readFormatter;
     private final MessageFormatter writeFormatter;
 
-    public MessageService(MessageFormatter readFormatter, MessageFormatter writeFormatter) {
+    public StrategyMessageService(MessageFormatter readFormatter, MessageFormatter writeFormatter) {
         this.readFormatter = readFormatter;
         this.writeFormatter = writeFormatter;
     }

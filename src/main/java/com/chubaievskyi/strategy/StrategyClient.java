@@ -12,16 +12,16 @@ public class StrategyClient {
         LOG.info("Program start!");
 
         MessageFormatter textMessageFormatter = new TextMessageFormatter();
-        MessageService textMessageService = new MessageService(textMessageFormatter, textMessageFormatter);
-        textMessageService.readAndWriteMessage();
+        StrategyMessageService textService = new StrategyMessageService(textMessageFormatter, textMessageFormatter);
+        textService.readAndWriteMessage();
 
         MessageFormatter jsonMessageFormatter = new JsonMessageFormatter();
-        MessageService jsonMessageService = new MessageService(jsonMessageFormatter, jsonMessageFormatter);
-        jsonMessageService.readAndWriteMessage();
+        StrategyMessageService jsonService = new StrategyMessageService(jsonMessageFormatter, jsonMessageFormatter);
+        jsonService.readAndWriteMessage();
 
         MessageFormatter xmlMessageFormatter = new XmlMessageFormatter();
-        MessageService xmlMessageService = new MessageService(xmlMessageFormatter, xmlMessageFormatter);
-        xmlMessageService.readAndWriteMessage();
+        StrategyMessageService xmlService = new StrategyMessageService(xmlMessageFormatter, xmlMessageFormatter);
+        xmlService.readAndWriteMessage();
 
         LOG.info("End of program!");
     }

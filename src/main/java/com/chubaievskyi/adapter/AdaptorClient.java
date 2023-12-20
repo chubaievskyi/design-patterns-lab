@@ -11,8 +11,8 @@ public class AdaptorClient {
 
         LOG.info("Program start!");
 
-        MessageService messageService = new MessageService();
-        messageService.readAndWriteMessage();
+        AdaptorMessageService adaptorMessageService = new AdaptorMessageService();
+        adaptorMessageService.readAndWriteMessage();
 
         LOG.info("End of program!");
     }

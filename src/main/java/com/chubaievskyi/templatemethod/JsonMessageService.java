@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class JsonMessageService extends MessageService {
+public class JsonMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(JsonMessageService.class);
     private final InputReader inputReader = new InputReader();
