@@ -2,6 +2,7 @@ package com.chubaievskyi.templatemethod;
 
 import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
+import com.chubaievskyi.exceptions.FileWriterException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,15 @@ public class JsonMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(JsonMessageService.class);
     private final InputReader inputReader = new InputReader();
+    private final FileWriter fileWriter;
+
+    public JsonMessageService() {
+        this.fileWriter = createFileWriter();
+    }
+
+    public JsonMessageService(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
+    }
 
     @Override
     protected String readMessage() {
@@ -24,9 +34,10 @@ public class JsonMessageService extends TemplateMessageService {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try {
             String xmlMessage = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Message(message));
             fileWriter.write(xmlMessage);
+            fileWriter.flush();
             log.info("Message successfully written to file: {}", filePath);
         } catch (IOException e) {
             log.error("Exception occurred while writing to file", e);
@@ -36,5 +47,13 @@ public class JsonMessageService extends TemplateMessageService {
     @Override
     protected String getFilePath() {
         return inputReader.getTemplateMethodJsonFilePath();
+    }
+
+    private FileWriter createFileWriter() {
+        try {
+            return new FileWriter(getFilePath());
+        } catch (IOException e) {
+            throw new FileWriterException("Error creating FileWriter", e);
+        }
     }
 }
