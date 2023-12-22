@@ -13,29 +13,32 @@ public class StrategyMessageService {
     private  final Logger log = LoggerFactory.getLogger(StrategyMessageService.class);
     private final InputReader inputReader = new InputReader();
 
-    private final MessageFormatter readFormatter;
-    private final MessageFormatter writeFormatter;
+    private final MessageFormatter messageFormatter;
 
-    public StrategyMessageService(MessageFormatter readFormatter, MessageFormatter writeFormatter) {
-        this.readFormatter = readFormatter;
-        this.writeFormatter = writeFormatter;
+    public StrategyMessageService(MessageFormatter messageFormatter) {
+        this.messageFormatter = messageFormatter;
     }
 
     public void readAndWriteMessage() {
-        String messageText = readMessage();
-        String formattedMessage = readFormatter.formatMessage(new Message(messageText));
-        writeMessage(formattedMessage);
+        String filePath = messageFormatter.getFilePath();
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            String messageText = readMessage();
+            String formattedMessage = messageFormatter.formatMessage(new Message(messageText));
+            writeMessage(formattedMessage, fileWriter);
+        } catch (IOException e) {
+            log.error("Error creating FileWriter", e);
+        }
+
     }
 
     protected String readMessage() {
         return inputReader.getMessage();
     }
 
-    protected void writeMessage(String formattedMessage) {
-        String filePath = writeFormatter.getFilePath();
-        try (FileWriter writer = new FileWriter(filePath)) {
-            writer.write(formattedMessage);
-            log.info("Message successfully written to file: {}", filePath);
+    protected void writeMessage(String formattedMessage, FileWriter fileWriter) {
+        try {
+            fileWriter.write(formattedMessage);
+            log.info("Message successfully written to file");
         } catch (IOException e) {
             log.error("Exception occurred while writing to file", e);
         }
