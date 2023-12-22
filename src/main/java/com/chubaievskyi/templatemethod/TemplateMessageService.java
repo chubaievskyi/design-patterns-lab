@@ -1,8 +1,14 @@
 package com.chubaievskyi.templatemethod;
 
+import com.chubaievskyi.example.InputReader;
+
 public abstract class TemplateMessageService {
 
-    protected abstract String readMessage();
+    private final InputReader inputReader = new InputReader();
+
+    protected String readMessage() {
+        return inputReader.getMessage();
+    }
 
     protected abstract void writeMessage(String message, String filePath);
 

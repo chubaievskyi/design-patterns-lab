@@ -11,7 +11,6 @@ import java.io.IOException;
 public class TextMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(TextMessageService.class);
-    private final InputReader inputReader = new InputReader();
     private final FileWriter fileWriter;
 
     public TextMessageService() {
@@ -20,11 +19,6 @@ public class TextMessageService extends TemplateMessageService {
 
     public TextMessageService(FileWriter fileWriter) {
         this.fileWriter = fileWriter;
-    }
-
-    @Override
-    protected String readMessage() {
-        return inputReader.getMessage();
     }
 
     @Override
@@ -41,7 +35,7 @@ public class TextMessageService extends TemplateMessageService {
 
     @Override
     protected String getFilePath() {
-        return inputReader.getTemplateMethodTxtFilePath();
+        return new InputReader().getTemplateMethodTxtFilePath();
     }
 
     private FileWriter createFileWriter() {

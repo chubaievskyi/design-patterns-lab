@@ -13,7 +13,6 @@ import java.io.IOException;
 public class JsonMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(JsonMessageService.class);
-    private final InputReader inputReader = new InputReader();
     private final FileWriter fileWriter;
 
     public JsonMessageService() {
@@ -24,10 +23,6 @@ public class JsonMessageService extends TemplateMessageService {
         this.fileWriter = fileWriter;
     }
 
-    @Override
-    protected String readMessage() {
-        return inputReader.getMessage();
-    }
 
     @Override
     protected void writeMessage(String message, String filePath) {
@@ -46,7 +41,7 @@ public class JsonMessageService extends TemplateMessageService {
 
     @Override
     protected String getFilePath() {
-        return inputReader.getTemplateMethodJsonFilePath();
+        return new InputReader().getTemplateMethodJsonFilePath();
     }
 
     private FileWriter createFileWriter() {
