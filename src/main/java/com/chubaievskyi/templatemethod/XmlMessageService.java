@@ -14,7 +14,6 @@ import java.io.IOException;
 public class XmlMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(XmlMessageService.class);
-    private final InputReader inputReader = new InputReader();
     private final FileWriter fileWriter;
 
     public XmlMessageService() {
@@ -23,11 +22,6 @@ public class XmlMessageService extends TemplateMessageService {
 
     public XmlMessageService(FileWriter fileWriter) {
         this.fileWriter = fileWriter;
-    }
-
-    @Override
-    protected String readMessage() {
-        return inputReader.getMessage();
     }
 
     @Override
@@ -47,7 +41,7 @@ public class XmlMessageService extends TemplateMessageService {
 
     @Override
     protected String getFilePath() {
-        return inputReader.getTemplateMethodXmlFilePath();
+        return new InputReader().getTemplateMethodXmlFilePath();
     }
 
     private FileWriter createFileWriter() {
