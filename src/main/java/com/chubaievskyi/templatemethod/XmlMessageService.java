@@ -2,6 +2,7 @@ package com.chubaievskyi.templatemethod;
 
 import com.chubaievskyi.example.InputReader;
 import com.chubaievskyi.example.Message;
+import com.chubaievskyi.exceptions.FileWriterException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.slf4j.Logger;
@@ -14,6 +15,15 @@ public class XmlMessageService extends TemplateMessageService {
 
     private final Logger log = LoggerFactory.getLogger(XmlMessageService.class);
     private final InputReader inputReader = new InputReader();
+    private final FileWriter fileWriter;
+
+    public XmlMessageService() {
+        this.fileWriter = createFileWriter();
+    }
+
+    public XmlMessageService(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
+    }
 
     @Override
     protected String readMessage() {
@@ -25,9 +35,10 @@ public class XmlMessageService extends TemplateMessageService {
 
         ObjectMapper objectMapper = new XmlMapper();
 
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try {
             String xmlMessage = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(new Message(message));
             fileWriter.write(xmlMessage);
+            fileWriter.flush();
             log.info("Message successfully written to file: {}", filePath);
         } catch (IOException e) {
             log.error("Exception occurred while writing to file", e);
@@ -37,5 +48,13 @@ public class XmlMessageService extends TemplateMessageService {
     @Override
     protected String getFilePath() {
         return inputReader.getTemplateMethodXmlFilePath();
+    }
+
+    private FileWriter createFileWriter() {
+        try {
+            return new FileWriter(getFilePath());
+        } catch (IOException e) {
+            throw new FileWriterException("Error creating FileWriter", e);
+        }
     }
 }
