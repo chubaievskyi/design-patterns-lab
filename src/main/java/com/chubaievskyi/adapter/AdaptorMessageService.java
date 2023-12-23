@@ -14,18 +14,17 @@ public class AdaptorMessageService {
 
     private final Logger log = LoggerFactory.getLogger(AdaptorMessageService.class);
     private final InputReader inputReader = new InputReader();
-    private final ObjectMapper jsonMapper = new ObjectMapper();
     private final ObjectMapper xmlMapper = new XmlMapper();
 
     public void readAndWriteMessage() {
 
         try (FileWriter writer = new FileWriter(getFilePath())) {
 
-            MessageReader propertyReader = new PropertyMessageReader(inputReader);
+            MessageReader propertyReader = new PropertyMessageReader();
             String propertyMessageText = propertyReader.readMessage();
             writeMessage(propertyMessageText, writer, xmlMapper);
 
-            MessageReader jsonReader = new JsonMessageReader(jsonMapper);
+            MessageReader jsonReader = new JsonMessageReader();
             String jsonMessageText = jsonReader.readMessage();
             writeMessage(jsonMessageText, writer, xmlMapper);
 
