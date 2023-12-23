@@ -1,23 +1,15 @@
 package com.chubaievskyi.adapter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonMessageReaderTest {
 
-    private JsonMessageReader jsonMessageReader;
-
-    @BeforeEach
-    void setUp() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        jsonMessageReader = new JsonMessageReader(objectMapper);
-    }
-
     @Test
     void testReadMessage() {
+
+        JsonMessageReader jsonMessageReader = new JsonMessageReader();
 
         String result = jsonMessageReader.readMessage();
 

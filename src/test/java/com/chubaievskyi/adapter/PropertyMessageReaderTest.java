@@ -1,23 +1,15 @@
 package com.chubaievskyi.adapter;
 
-import com.chubaievskyi.example.InputReader;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PropertyMessageReaderTest {
 
-    private PropertyMessageReader propertyMessageReader;
-
-    @BeforeEach
-    void setUp() {
-        InputReader inputReader = new InputReader();
-        propertyMessageReader = new PropertyMessageReader(inputReader);
-    }
-
     @Test
     void testReadMessage() {
+
+        PropertyMessageReader propertyMessageReader = new PropertyMessageReader();
 
         String result = propertyMessageReader.readMessage();
 
